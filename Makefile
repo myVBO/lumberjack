@@ -1,4 +1,5 @@
 VERSION=0.1.2
+ITERATION=3
 
 # By default, all dependencies (zeromq, etc) will be downloaded and installed
 # locally. You can change this if you are deploying your own.
@@ -48,7 +49,7 @@ vendor-clean:
 
 rpm deb: PREFIX=/opt/lumberjack
 rpm deb: | build-all
-	fpm -s dir -t $@ -n lumberjack -v $(VERSION) \
+	fpm -s dir -t $@ -n lumberjack -v $(VERSION) --iteration $(ITERATION) \
 		--exclude '*.a' --exclude 'lib/pkgconfig/zlib.pc' \
 		--description "a log shipping tool" \
 		--url "https://github.com/jordansissel/lumberjack" \
