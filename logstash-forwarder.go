@@ -5,7 +5,6 @@ import (
   "os"
   "time"
   "flag"
-  "log/syslog"
   "runtime/pprof"
 )
 
@@ -60,11 +59,7 @@ func main() {
   
   log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
   if *use_syslog {
-    writer, err := syslog.New(syslog.LOG_INFO | syslog.LOG_DAEMON, "lumberjack")
-    if err != nil {
-      log.Fatalf("Failed to open syslog: %s\n", err)
-    }
-    log.SetOutput(writer)
+    configureSyslog()
   }
 
   //Ensure there is a register file, if not create one.
